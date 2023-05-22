@@ -1,7 +1,7 @@
 import { Splide } from '@splidejs/splide';
 
 // _____________________________________________________________ carousels _____________________________________________________________
-
+// hero
 const splide = new Splide('.splide', {
   arrows: false,
   lazyLoad: true,
@@ -17,6 +17,7 @@ const splide = new Splide('.splide', {
   },
 });
 splide.mount();
+// testimonials
 const splideTestimonials = new Splide('#testimonial-carousel', {
   arrows: false,
   classes: {
@@ -24,6 +25,7 @@ const splideTestimonials = new Splide('#testimonial-carousel', {
   },
 });
 splideTestimonials.mount();
+// portfolio
 
 // _______________________________________________________________ menu _______________________________________________________________
 
@@ -94,8 +96,10 @@ const buttonWeb = document.getElementById('btnWeb');
 const buttonPrint = document.getElementById('btnPrint');
 
 const imageGallery = document.querySelectorAll('[data-filter]');
+let currentFilter = 'all';
 
 function applyFilter(filter) {
+  currentFilter = filter;
   imageGallery.forEach((image) => {
     if (filter === 'all' || filter === image.dataset.filter) {
       image.style.display = 'block';
@@ -109,3 +113,43 @@ buttonApp.addEventListener('click', () => applyFilter('app'));
 buttonPhoto.addEventListener('click', () => applyFilter('photo'));
 buttonWeb.addEventListener('click', () => applyFilter('web'));
 buttonPrint.addEventListener('click', () => applyFilter('print'));
+
+// _______________________________________________________ portfolio modal gallery _______________________________________________________
+
+const modalDlg = document.getElementById('portfolioModal');
+const modalDlgCloseButton = document.getElementById('porfolioDlgClose');
+const porfolioCarouselList = document.getElementById('portfolioCarouselList');
+const splidePortfolio = new Splide('#portfolioCarousel');
+
+modalDlgCloseButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  splidePortfolio.destroy();
+  modalDlg.close();
+});
+document.querySelectorAll('.plus-circle').forEach((circle) =>
+  circle.addEventListener('click', function () {
+    let filteredGallery = Array.from(imageGallery, (div) =>
+      currentFilter === 'all' || currentFilter === div.dataset.filter
+        ? div.querySelector('.portfolio-image').src
+        : null
+    );
+    filteredGallery = filteredGallery.filter((img) => Boolean(img));
+
+    porfolioCarouselList.innerHTML = '';
+
+    filteredGallery.forEach((imageSrc) => {
+      const li = document.createElement('li');
+      li.classList = 'splide__slide grid place-items-center';
+      const image = document.createElement('img');
+      image.src = imageSrc;
+      image.classList = 'w-full';
+      li.append(image);
+      porfolioCarouselList.append(li);
+    });
+    splidePortfolio.mount();
+    modalDlg.showModal();
+    splidePortfolio.go(
+      filteredGallery.indexOf(this.parentElement.children[2].src)
+    );
+  })
+);
