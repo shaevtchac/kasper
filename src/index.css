@@ -1,0 +1,228 @@
+/* @import 'npm:@splidejs/splide/dist/css/splide.min.css'; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+  }
+
+  sup,
+  sub {
+    @apply text-[0.3em];
+  }
+  sup {
+    @apply relative -top-[1.5em];
+  }
+}
+
+@layer components {
+  .line-circle-separator {
+    @apply relative  flex h-2 w-2 items-center justify-center rounded-full border border-black;
+  }
+  .line-circle-separator::before,
+  .line-circle-separator::after {
+    content: '';
+    @apply absolute  h-[1px] w-10 bg-black;
+  }
+  .line-circle-separator::before {
+    left: 100%;
+  }
+  .line-circle-separator::after {
+    right: 100%;
+  }
+
+  .btn-primary {
+    @apply block bg-primary p-2 text-xs text-white;
+  }
+  .btn-primary-outline {
+    @apply block border border-primary bg-transparent p-2 text-xs;
+  }
+
+  .btn-secondary {
+    @apply block bg-secondary p-2 text-xs;
+  }
+
+  .hectagon {
+    position: relative;
+    width: 50px;
+    height: 28.87px;
+    background-color: #1f2021;
+    margin: 14.43px auto;
+  }
+  .hectagon::before,
+  .hectagon::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    left: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+  }
+  .hectagon::before {
+    bottom: 100%;
+    border-bottom: 14.43px solid #1f2021;
+  }
+  .hectagon::after {
+    top: 100%;
+    border-top: 14.43px solid #1f2021;
+  }
+}
+
+@layer utilities {
+  .h1 {
+    font-size: 2.5em;
+    line-height: 1.1;
+    color: white;
+  }
+  .h2 {
+    font-size: 2.5em;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .h3 {
+    font-size: 1.7em;
+    line-height: 1.1;
+  }
+  .lead {
+    font-weight: 300;
+  }
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@font-face {
+  font-family: 'ADELIA';
+  src: url('../public/fonts/ADELIA.otf');
+} */
+
+/* __________________________________________________________________________ menu ___________________________________________________________ */
+nav.is-open {
+  max-height: 500px !important;
+  transition: max-height 0.25s ease-in;
+  @apply bg-menubg;
+}
+
+nav.reduced {
+  max-height: 50px;
+  min-height: 50px;
+  transition: all 0.25s ease-in;
+  @apply bg-menubg;
+}
+nav.reduced .hamburger {
+  top: 0px;
+}
+nav.reduced li {
+  line-height: 50px;
+}
+
+.hamburger {
+  @apply m-0 inline-block cursor-pointer overflow-visible border-0 bg-transparent
+  text-inherit duration-150 ease-linear;
+  padding: 15px 15px;
+  transition-property: opacity, filter;
+  font: inherit;
+  text-transform: none;
+}
+.hamburger:hover {
+  @apply opacity-70;
+}
+.hamburger.is-active:hover {
+  @apply opacity-70;
+}
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  @apply bg-white;
+}
+
+.hamburger-box {
+  @apply relative inline-block h-6 w-10;
+}
+
+.hamburger-inner {
+  @apply top-1/2 block;
+  margin-top: -2px;
+}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  @apply absolute h-1 w-10 rounded bg-white 
+  transition-transform duration-150;
+  transition-timing-function: ease;
+}
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: '';
+  display: block;
+}
+.hamburger-inner::before {
+  top: -10px;
+}
+.hamburger-inner::after {
+  bottom: -10px;
+}
+
+/*
+   * Slider
+   */
+.hamburger--slider .hamburger-inner {
+  top: 2px;
+}
+.hamburger--slider .hamburger-inner::before {
+  top: 10px;
+  transition-property: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+}
+.hamburger--slider .hamburger-inner::after {
+  top: 20px;
+}
+
+.hamburger--slider.is-active .hamburger-inner {
+  transform: translate3d(0, 10px, 0) rotate(45deg);
+}
+.hamburger--slider.is-active .hamburger-inner::before {
+  transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+  opacity: 0;
+}
+.hamburger--slider.is-active .hamburger-inner::after {
+  transform: translate3d(0, -20px, 0) rotate(-90deg);
+}
+
+/* _____________________________________________________ animations ________________________________________________ */
+
+@keyframes fade-from-left {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-from-right {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-from-bottom {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ______________________________________________________________ splide customize __________________________________________ */
+
+.page-dot {
+  background: #00c7fc !important;
+}
