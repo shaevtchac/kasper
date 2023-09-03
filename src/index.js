@@ -25,7 +25,7 @@ const splideTestimonials = new Splide('#testimonial-carousel', {
   },
 });
 splideTestimonials.mount();
-// portfolio
+// portfolio moved to portfolio modal gallery
 
 // _______________________________________________________________ menu _______________________________________________________________
 
@@ -59,6 +59,12 @@ const menuObserver = new IntersectionObserver(
 );
 
 menuObserver.observe(divTrigger);
+menuItems.addEventListener('click', () => {
+  menuButton.classList.remove('is-active');
+  nav.classList.remove('is-open');
+  menuButton.setAttribute('aria-expanded', false);
+  menuItems.classList.add('hidden');
+});
 
 // _______________________________________________________________ animations _______________________________________________________________
 
