@@ -1,7 +1,34 @@
-/* @import 'npm:@splidejs/splide/dist/css/splide.min.css'; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --num1: 1263;
+  --num2: 256;
+  --num3: 1743;
+  --num4: 17;
+}
+
+@property --num1 {
+  syntax: '<integer>';
+  initial-value: 1263;
+  inherits: false;
+}
+@property --num2 {
+  syntax: '<integer>';
+  initial-value: 256;
+  inherits: false;
+}
+@property --num3 {
+  syntax: '<integer>';
+  initial-value: 1743;
+  inherits: false;
+}
+@property --num4 {
+  syntax: '<integer>';
+  initial-value: 17;
+  inherits: false;
+}
 
 @layer base {
   body {
@@ -101,12 +128,7 @@
   }
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-@font-face {
-  font-family: 'ADELIA';
-  src: url('../public/fonts/ADELIA.otf');
-} */
 
 /* __________________________________________________________________________ menu ___________________________________________________________ */
 nav.is-open {
@@ -203,6 +225,40 @@ nav.reduced li {
 }
 
 /* _____________________________________________________ animations ________________________________________________ */
+/* data-animation="num1" data-duration="3s" data-timing="cubic-bezier(0,0,0,1)" for best results class="before:[content:counter(num1)] [counter-reset:num1_var(--num1)]"*/
+
+@keyframes num1 {
+  from {
+    --num1: 0;
+  }
+  to {
+    --num1: 1263;
+  }
+}
+@keyframes num2 {
+  from {
+    --num2: 0;
+  }
+  to {
+    --num2: 256;
+  }
+}
+@keyframes num3 {
+  from {
+    --num3: 0;
+  }
+  to {
+    --num3: 1743;
+  }
+}
+@keyframes num4 {
+  from {
+    --num4: 0;
+  }
+  to {
+    --num4: 17;
+  }
+}
 
 @keyframes fade-from-left {
   from {
@@ -221,6 +277,13 @@ nav.reduced li {
 @keyframes fade-from-bottom {
   from {
     transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-from-top {
+  from {
+    transform: translateY(-30px);
     opacity: 0;
   }
 }
